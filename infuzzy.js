@@ -20,9 +20,10 @@
             osVersion: null,
             userAgent: navigator.userAgent,
             device: null,
-            language: null,
+            language: navigator.language,
         }
 
+        // Utils
         function extractVersion(browser) {
             if(info.userAgent.indexOf(browser)){
                 var browserVersion = info.userAgent.match(/Chrome\/((\d+\.)+\d+)/);
@@ -37,27 +38,42 @@
 
         _infuzzy.getInfo = function () {
 
-            // Chrome for Android
-            if (info.userAgent.search(/Chrome\/[.0 - 9] * Mobile/i) >= 0) {
-                info.browserName = "Chrome for Android";
-                info.device = "Phone";
-                info.browserVersion = extractVersion(info.browserName);
-                info.browserVersionShort = info.browserVersion.substring(0, 2);
-            }
-            else {  //Chrome for Tablet
-                if (info.userAgent.search(/Chrome\/[.0-9]* (?!Mobile)/i) >= 0 &&
-                info.userAgent.indexOf("Linux") >= 0 && info.userAgent.indexOf("Android") >= 0) {
+            // Browser Detection Area **********
 
+            // Chrome for Android
+            if (info.userAgent.indexOf("Chrome")) {
+
+                if (info.userAgent.search(/Chrome\/[.0 - 9] * Mobile/i) >= 0) {
                     info.browserName = "Chrome for Android";
-                    info.device = "Tablet";
+                    info.device = "Phone";
                     info.browserVersion = extractVersion(info.browserName);
                     info.browserVersionShort = info.browserVersion.substring(0, 2);
                 }
-                else { //Chrome Computer
-                    info.browserName = "Chrome";
-                    info.device = "Computer";
-                    info.browserVersion = extractVersion(info.browserName);
-                    info.browserVersionShort = info.browserVersion.substring(0, 2);
+                else {  //Chrome for Tablet
+                    if (info.userAgent.search(/Chrome\/[.0-9]* (?!Mobile)/i) >= 0 &&
+                    info.userAgent.indexOf("Linux") >= 0 && info.userAgent.indexOf("Android") >= 0) {
+
+                        info.browserName = "Chrome for Android";
+                        info.device = "Tablet";
+                        info.browserVersion = extractVersion(info.browserName);
+                        info.browserVersionShort = info.browserVersion.substring(0, 2);
+                    }
+                    else { //Chrome Computer
+                        info.browserName = "Chrome";
+                        info.device = "Computer";
+                        info.browserVersion = extractVersion(info.browserName);
+                        info.browserVersionShort = info.browserVersion.substring(0, 2);
+                    }
+                }
+            }
+
+            // OS Detection Area *************
+
+            if (info.userAgent.indexOf("Windows") >= 0) {
+                if (info.userAgent.indexOf("Windows Phone") >= 0) {
+                    info.osName = "Windows Phone";
+                } else {
+                    info.osName = "Windows";
                 }
             }
 
