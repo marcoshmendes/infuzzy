@@ -25,10 +25,13 @@
 
         // Utils
         function extractVersion(browser) {
-            if(info.userAgent.indexOf(browser)){
-                var browserVersion = info.userAgent.match(/Chrome\/((\d+\.)+\d+)/);
-                browserVersion = browserVersion[0].split("/");
-                return browserVersion[1];
+            if (info.userAgent.indexOf(browser) >= 0) {
+                
+                if (browser == 'Chrome') {
+                    var browserVersion = info.userAgent.match(/Chrome\/((\d+\.)+\d+)/);
+                    browserVersion = browserVersion[0].split("/");
+                    return browserVersion[1];
+                }
             }
         };
 
@@ -41,7 +44,7 @@
             // Browser Detection Area **********
 
             // Chrome for Android
-            if (info.userAgent.indexOf("Chrome")) {
+            if (info.userAgent.indexOf("Chrome") >= 0) {
 
                 if (info.userAgent.search(/Chrome\/[.0 - 9] * Mobile/i) >= 0) {
                     info.browserName = "Chrome for Android";
@@ -64,6 +67,20 @@
                         info.browserVersion = extractVersion(info.browserName);
                         info.browserVersionShort = info.browserVersion.substring(0, 2);
                     }
+                }
+            }
+
+            // FireFox
+
+            if (info.userAgent.indexOf("Firefox") >= 0) {
+
+                if (info.userAgent.search(/Mobile/i) >= 0) {
+                }
+                else if (info.userAgent.search(/Tablet/i) >= 0) {
+
+                }
+                else {
+
                 }
             }
 
@@ -166,7 +183,7 @@
                         info.device = "Phone";
                         break;
                 } // Switch
-            } // Windows
+            } // If Windows
 
 
             // Game Consoles
