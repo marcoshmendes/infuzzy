@@ -27,16 +27,23 @@
         function extractVersion(browser) {
             if (info.userAgent.indexOf(browser) >= 0) {
                 
-                if (browser == 'Chrome') {
-                    var browserVersion = info.userAgent.match(/Chrome\/((\d+\.)+\d+)/);
-                    browserVersion = browserVersion[0].split("/");
-                    return browserVersion[1];
+                switch(browser){
+                    case "Chrome":
+                        var browserVersion = info.userAgent.match(/Chrome\/((\d+\.)+\d+)/);
+                        browserVersion = browserVersion[0].split("/");
+                        return browserVersion[1];
+                        break;
+                    case "Firefox":
+                        var browserVersion = info.userAgent.match(/Firefox\/((\d+\.)+\d+)/);
+                        browserVersion = browserVersion[0].split("/");
+                        return browserVersion[1];
+                        break;
                 }
             }
         };
 
         _infuzzy.sayHi = function () {
-            console.log("Hi stranger, infuzzy is ready to action!");
+            console.log("Hi stranger");
         };
 
         _infuzzy.getInfo = function () {
