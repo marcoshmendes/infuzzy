@@ -22,6 +22,6 @@ document.getElementById("agent").innerHTML = info.userAgent;
 //var agent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.1) Gecko/2008070208 Firefox/3.0.1"; //Windows XP
 
 //console.log(agent.match(/(NT) \d\.\d\d?|Windows 98; Win 9x 4.90|Windows ME|Windows 98|Win98|Windows 95|Win95|Windows CE|Windows XP|WinNT4.0|Windows Phone OS \d\.\d|Windows Phone \d\d?\.\d/i));
-
+alert(infuzzy.sayHi());
 document.getElementById("info").innerHTML = "Browser: " + info.browserName + " " + info.browserVersion + "<br /> Browser Version Short: " + info.browserVersionShort + "<br /> Idioma: "
      + info.language + "<br /> SO: " + info.osName + " <br /> Versão SO: " + info.osVersion + " <br /> Device: " + info.device;

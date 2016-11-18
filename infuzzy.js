@@ -23,8 +23,13 @@
             language: navigator.language,
         }
 
+        // Teste Library
+        _infuzzy.sayHi = function () {
+            return "Hi stranger";
+        };
+
         // Extract Browser Version
-        function extractVersion(browser) {
+        var extractVersion = function(browser) {
             if (info.userAgent.indexOf(browser) >= 0) {
                 
                 switch(browser){
@@ -99,13 +104,15 @@
                     case "ScoutJet":
                         return null;
                         break;
-                }
-            }
-        };
+                }// switch
+            } //if
+        }; //function
 
-        _infuzzy.sayHi = function () {
-            console.log("Hi stranger");
-        };
+        var browserDetec = function () {
+
+        }
+
+        
 
         _infuzzy.getInfo = function () {
 
