@@ -20,3 +20,6 @@ Windows Phone User Agent
 
 Xbox 360 user agent, desktop and mobile mode
 ##http://stackoverflow.com/questions/13503852/detect-ie10-on-xbox
+
+List of Web Crawlers user agents
+##https://deviceatlas.com/blog/list-of-web-crawlers-user-agents

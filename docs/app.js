@@ -23,5 +23,5 @@ document.getElementById("agent").innerHTML = info.userAgent;
 
 //console.log(agent.match(/(NT) \d\.\d\d?|Windows 98; Win 9x 4.90|Windows ME|Windows 98|Win98|Windows 95|Win95|Windows CE|Windows XP|WinNT4.0|Windows Phone OS \d\.\d|Windows Phone \d\d?\.\d/i));
 
- document.getElementById("info").innerHTML = "Browser: " + info.browserName + " " + info.browserVersion + "<br /> Idioma: "
-     + info.language + "<br /> SO: " + info.osName + " " + info.osVersion;
+document.getElementById("info").innerHTML = "Browser: " + info.browserName + " " + info.browserVersion + "<br /> Browser Version Short: " + info.browserVersionShort + "<br /> Idioma: "
+     + info.language + "<br /> SO: " + info.osName + " <br /> Versão SO: " + info.osVersion + " <br /> Device: " + info.device;
