@@ -23,7 +23,7 @@
             language: navigator.language,
         }
 
-        // Utils
+        // Extract Browser Version
         function extractVersion(browser) {
             if (info.userAgent.indexOf(browser) >= 0) {
                 
@@ -42,6 +42,62 @@
                         var browserVersion = info.userAgent.match(/MJ12bot\/v?((\d+\.)+\d+)/);
                         browserVersion = browserVersion[0].split("/");
                         return browserVersion[1];
+                        break;
+                    case "Googlebot":
+                        var browserVersion = info.userAgent.match(/Googlebot.*\/\d\.\d/);
+                        browserVersion = browserVersion[0].split("/");
+                        return browserVersion[1];
+                        break;
+                    case "AdsBot-Google-Mobile":
+                        var browserVersion = info.userAgent.match(/AdsBot-Google-Mobile/);
+                        return null;
+                        break;
+                    case "bingbot":
+                        var browserVersion = info.userAgent.match(/bingbot\/\d\.\d/);
+                        browserVersion = browserVersion[0].split("/");
+                        return browserVersion[1];
+                        break;
+                    case "BingPreview":
+                        var browserVersion = info.userAgent.match(/BingPreview\/\d\.\d.?/);
+                        browserVersion = browserVersion[0].split("/");
+                        return browserVersion[1];
+                        break;
+                    case "SimplePie":
+                        var browserVersion = info.userAgent.match(/SimplePie\/\d\.\d\.\d?/);
+                        browserVersion = browserVersion[0].split("/");
+                        return browserVersion[1];
+                        break;
+                    case "Yahoo! Slurp":
+                        return null;
+                        break;
+                    case "SiteLockSpider":
+                        return null;
+                        break;
+                    case "okhttp":
+                        var browserVersion = info.userAgent.match(/okhttp\/\d\.\d\.\d?/);
+                        browserVersion = browserVersion[0].split("/");
+                        return browserVersion[1];
+                        break;
+                    case "curl":
+                        var browserVersion = info.userAgent.match(/curl\/\d\.\d\d?\.\d?/);
+                        browserVersion = browserVersion[0].split("/");
+                        return browserVersion[1];
+                        break;
+                    case "ips-agent":
+                        return null;
+                        break;
+                    case "BLEXBot":
+                        var browserVersion = info.userAgent.match(/BLEXBot\/\d\.\d/);
+                        browserVersion = browserVersion[0].split("/");
+                        return browserVersion[1];
+                        break;
+                    case "YandexBot":
+                        var browserVersion = info.userAgent.match(/YandexBot\/\d\.\d/);
+                        browserVersion = browserVersion[0].split("/");
+                        return browserVersion[1];
+                        break;
+                    case "ScoutJet":
+                        return null;
                         break;
                 }
             }
@@ -93,7 +149,112 @@
                     info.browserName = "MJ12bot";
                     info.device = "Desktop";
                     info.browserVersion = extractVersion(info.browserName);
-                    info.browserVersionShort = info.browserVersion.substring(0, 2);
+                    info.browserVersionShort = info.browserVersion.substring(1, 2);
+            }
+
+            if (info.userAgent.indexOf("Googlebot") >= 0) {
+                if (info.userAgent.indexOf("Mobile") >= 0) {
+                    info.browserName = "Googlebot";
+                    info.device = "Mobile";
+                    info.browserVersion = extractVersion(info.browserName);
+                    info.browserVersionShort = info.browserVersion.substring(0, 1);
+                }
+                else {
+                    info.browserName = "Googlebot";
+                    info.device = "Desktop";
+                    info.browserVersion = extractVersion(info.browserName);
+                    info.browserVersionShort = info.browserVersion.substring(0, 1);
+                }
+            }
+
+            if (info.userAgent.indexOf("AdsBot-Google-Mobile") >= 0) {
+                info.browserName = "AdsBot-Google-Mobile";
+                info.device = "Mobile";
+                info.browserVersion = extractVersion(info.browserName);
+                info.browserVersionShort = null;
+            }
+
+            if (info.userAgent.indexOf("bingbot") >= 0) {
+                if(info.userAgent.indexOf("Mobile") >= 0){
+                    info.browserName = "bingbot";
+                    info.device = "Mobile";
+                    info.browserVersion = extractVersion(info.browserName);
+                    info.browserVersionShort = info.browserVersion.substring(0, 1);
+                }
+                else{
+                    info.browserName = "bingbot";
+                    info.device = "Desktop";
+                    info.browserVersion = extractVersion(info.browserName);
+                    info.browserVersionShort = info.browserVersion.substring(0, 1);
+                }
+            }
+
+            if (info.userAgent.indexOf("BingPreview") >= 0 && info.userAgent.indexOf("Mobile") >= 0) {
+                info.browserName = "BingPreview";
+                info.device = "Mobile";
+                info.browserVersion = extractVersion(info.browserName);
+                info.browserVersionShort = info.browserVersion.substring(0, 1);
+            }
+
+            if (info.userAgent.indexOf("SimplePie") >= 0) {
+                info.browserName = "SimplePie";
+                info.device = "Desktop";
+                info.browserVersion = extractVersion(info.browserName);
+                info.browserVersionShort = info.browserVersion.substring(0, 1);
+            }
+
+            if (info.userAgent.indexOf("Yahoo! Slurp") >= 0) {
+                info.browserName = "Yahoo! Slurp";
+                info.device = "Desktop";
+                info.browserVersion = extractVersion(info.browserName);
+                info.browserVersionShort = null;
+            }
+            if (info.userAgent.indexOf("SiteLockSpider") >= 0) {
+                info.browserName = "SiteLockSpider";
+                info.device = "Desktop";
+                info.browserVersion = extractVersion(info.browserName);
+                info.browserVersionShort = null;
+            }
+            if (info.userAgent.indexOf("okhttp") >= 0) {
+                info.browserName = "okhttp";
+                info.device = "Desktop";
+                info.browserVersion = extractVersion(info.browserName);
+                info.browserVersionShort = null;
+            }
+
+            if (info.userAgent.indexOf("curl") >= 0) {
+                info.browserName = "curl";
+                info.device = "Desktop";
+                info.browserVersion = extractVersion(info.browserName);
+                info.browserVersionShort = info.browserVersion.substring(0, 1);
+            }
+
+            if (info.userAgent.indexOf("ips-agent") >= 0) {
+                info.browserName = "ips-agent";
+                info.device = "Mobile";
+                info.browserVersion = extractVersion(info.browserName);
+                info.browserVersionShort = null;
+            }
+
+            if (info.userAgent.indexOf("BLEXBot") >= 0) {
+                info.browserName = "BLEXBot";
+                info.device = "Desktop";
+                info.browserVersion = extractVersion(info.browserName);
+                info.browserVersionShort = info.browserVersion.substring(0, 1);
+            }
+
+            if (info.userAgent.indexOf("YandexBot") >= 0) {
+                info.browserName = "YandexBot";
+                info.device = "Desktop";
+                info.browserVersion = extractVersion(info.browserName);
+                info.browserVersionShort = info.browserVersion.substring(0, 1);
+            }
+
+            if (info.userAgent.indexOf("ScoutJet") >= 0) {
+                info.browserName = "ScoutJet";
+                info.device = "Desktop";
+                info.browserVersion = extractVersion(info.browserName);
+                info.browserVersionShort = null;
             }
 
             // OS Name Detection Area *************
@@ -101,10 +262,49 @@
             if (info.userAgent.indexOf("Windows") >= 0) {
                 info.osName = "Windows";
             }
-            else if (info.userAgent.indexOf("Android") >= 0) {
+            if (info.userAgent.indexOf("Android") >= 0) {
                 info.osName = "Android";
             }
-            else if (info.userAgent.indexOf("MJ12bot") >= 0) {
+            if (info.userAgent.indexOf("MJ12bot") >= 0) {
+                info.osName = "Search Engine";
+            }
+            if (info.userAgent.indexOf("Googlebot") >= 0) {
+                info.osName = "Search Engine";
+            }
+            if (info.userAgent.indexOf("AdsBot-Google-Mobile") >= 0) {
+                info.osName = "Search Engine";
+            }
+            if (info.userAgent.indexOf("bingbot") >= 0) {
+                info.osName = "Search Engine";
+            }
+            if (info.userAgent.indexOf("SimplePie") >= 0) {
+                info.osName = "RSS bot";
+            }
+            if (info.userAgent.indexOf("BingPreview") >= 0) {
+                info.osName = "Search Engine";
+            }
+            if (info.userAgent.indexOf("Yahoo! Slurp") >= 0) {
+                info.osName = "Search Engine";
+            }
+            if (info.userAgent.indexOf("SiteLockSpider") >= 0) {
+                info.osName = "Security";
+            }
+            if (info.userAgent.indexOf("okhttp") >= 0) {
+                info.osName = "Bot Various Purposes";
+            }
+            if (info.userAgent.indexOf("curl") >= 0) {
+                info.osName = "Bot Various Purposes";
+            }
+            if (info.userAgent.indexOf("ips-agent") >= 0) {
+                info.osName = "Market Research";
+            }
+            if (info.userAgent.indexOf("BLEXBot") >= 0) {
+                info.osName = "Market research";
+            }
+            if (info.userAgent.indexOf("YandexBot") >= 0) {
+                info.osName = "Search Engine";
+            }
+            if (info.userAgent.indexOf("ScoutJet") >= 0) {
                 info.osName = "Search Engine";
             }
 
@@ -117,7 +317,41 @@
                 info.osVersion = splited[1].trim();
             }
 
+            //Bot
             if (info.userAgent.indexOf("MJ12bot") >= 0) {
+                info.osVersion = info.browserVersion;
+            }
+            if (info.userAgent.indexOf("Googlebot") >= 0) {
+                info.osVersion = info.browserVersion;
+            }
+            if (info.userAgent.indexOf("AdsBot-Google-Mobile") >= 0) {
+                info.osVersion = null;
+            }
+            if (info.userAgent.indexOf("bingbot") >= 0) {
+                info.osVersion = info.browserVersion;
+            }
+            if (info.userAgent.indexOf("SimplePie") >= 0) {
+                info.osVersion = info.browserVersion;
+            }
+            if (info.userAgent.indexOf("BingPreview") >= 0) {
+                info.osVersion = info.browserVersion;
+            }
+            if (info.userAgent.indexOf("Yahoo! Slurp") >= 0) {
+                info.osVersion = null;
+            }
+            if (info.userAgent.indexOf("okhttp") >= 0) {
+                info.osVersion = info.browserVersion;
+            }
+            if (info.userAgent.indexOf("curl") >= 0) {
+                info.osVersion = info.browserVersion;
+            }
+            if (info.userAgent.indexOf("ips-agent") >= 0) {
+                info.osVersion = info.browserVersion;
+            }
+            if (info.userAgent.indexOf("BLEXBot") >= 0) {
+                info.osVersion = info.browserVersion;
+            }
+            if (info.userAgent.indexOf("YandexBot") >= 0) {
                 info.osVersion = info.browserVersion;
             }
 
