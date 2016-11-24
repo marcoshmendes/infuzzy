@@ -1,5 +1,38 @@
-var info = infuzzy.getInfo();
-document.getElementById("agent").innerHTML = info.userAgent;
+// TEST =======================================================================================
+
+create("Current Browser", infuzzy.getInfo().userAgent, infuzzy.getInfo());
+
+create("Samsung Galaxy S6", 
+"Mozilla/5.0 (Linux; Android 6.0.1; SM-G920V Build/MMB29K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.98 Mobile Safari/537.36", 
+infuzzy.getInfoFromValue("Mozilla/4.0 (compatible; MSIE 5.5; Windows 98; Win 9x 4.90)"));
+
+// =======================================================================================
+
+function create(_title, _userAgent, _json){
+
+    var title = document.createElement("h3");                      
+    var nodeTitle = document.createTextNode(_title);
+
+    var agent = document.createElement("h5");                      
+    var nodeAgent = document.createTextNode(_userAgent);
+
+    var json = document.createElement("p");                      
+    var nodeJson = document.createTextNode(JSON.stringify(_json, null, 2));
+
+    var divisor = document.createElement("h6");                      
+    var nodeDivisor = document.createTextNode("_____________________________________________________________________________________________________________");   
+
+    json.appendChild(nodeJson);
+    title.appendChild(nodeTitle);
+    agent.appendChild(nodeAgent);
+    divisor.appendChild(nodeDivisor);
+
+    document.getElementById("info").appendChild(title);
+    document.getElementById("info").appendChild(agent);                      
+    document.getElementById("info").appendChild(json);
+    document.getElementById("info").appendChild(divisor);           
+}
+
 
 //var agent = "Mozilla/4.0 (compatible; MSIE 5.5; Windows 98; Win 9x 4.90)"; //Windows ME
 //var agent = "Mozilla/5.0 (Windows; U; Win98; en-US; rv:1.4) Gecko Netscape/7.1 (ax)"; //Windows 98
@@ -22,6 +55,3 @@ document.getElementById("agent").innerHTML = info.userAgent;
 //var agent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.1) Gecko/2008070208 Firefox/3.0.1"; //Windows XP
 
 //console.log(agent.match(/(NT) \d\.\d\d?|Windows 98; Win 9x 4.90|Windows ME|Windows 98|Win98|Windows 95|Win95|Windows CE|Windows XP|WinNT4.0|Windows Phone OS \d\.\d|Windows Phone \d\d?\.\d/i));
-alert(infuzzy.sayHi());
-document.getElementById("info").innerHTML = "Browser: " + info.browserName + " " + info.browserVersion + "<br /> Browser Version Short: " + info.browserVersionShort + "<br /> Idioma: "
-     + info.language + "<br /> SO: " + info.osName + " <br /> Versão SO: " + info.osVersion + " <br /> Device: " + info.device;
