@@ -53,7 +53,7 @@ Infuzzy is in development, till now we have the support bellow:
 * Browsers | all versions
   * Chrome
   * Firefox
-* SO
+* SO | all versions
   * Windows
   * Android
 * Platform
