@@ -23,3 +23,6 @@ Xbox 360 user agent, desktop and mobile mode
 
 List of Web Crawlers user agents
 ##https://deviceatlas.com/blog/list-of-web-crawlers-user-agents
+
+Microsoft - IE - EDGE - Understanding user-agent strings
+##https://msdn.microsoft.com/en-us/library/ms537503(v=vs.85).aspx
