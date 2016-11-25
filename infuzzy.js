@@ -136,6 +136,32 @@
                 }
             }
 
+            // Internet Explorer
+            if (info.userAgent.indexOf("Trident") >= 0 || info.userAgent.indexOf("MSIE") >= 0) {
+                if (info.userAgent.indexOf("Mobile") >= 0) {
+                    info.browserName = "Internet Explorer";
+                    info.device = "Mobile";
+                    // Version VersionShort
+                } 
+                else {
+                    info.browserName = "Internet Explorer";
+                    info.device = "Desktop";
+                    // Version VersionShort
+                }
+            }
+
+            // //Edge wrong, identify as Chrome
+            // if (info.userAgent.indexOf("Edge") >= 0) {
+            //     if(info.userAgent.indexOf("Mobile") >= 0){
+            //         info.browserName = "Edge";
+            //         info.device = "Mobile";
+            //     }
+            //     else{
+            //         info.browserName = "Edge";
+            //         info.device = "Desktop";
+            //     }
+            // }
+
             // FireFox
             if (info.userAgent.indexOf("Firefox") >= 0) {
                 if (info.userAgent.search(/Mobile/i) >= 0) {
