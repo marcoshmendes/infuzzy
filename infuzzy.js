@@ -311,6 +311,11 @@
                 info.osVersion = osVersionDetect();
                 return true;
             }
+            if (info.userAgent.indexOf("Win") >= 0) {
+                info.osName = "Windows";
+                info.osVersion = osVersionDetect();
+                return true;
+            }
             if (info.userAgent.indexOf("Xbox") >= 0) {
                 info.osName = "Windows";
                 info.osVersion = osVersionDetect();
@@ -433,7 +438,7 @@
             // OS Version Detect *************
 
             // Android
-            if (info.userAgent.indexOf("Android") >= 0) {
+            if (info.userAgent.indexOf("Android") >= 0 && info.userAgent.indexOf("Windows Phone") == -1) {
                 var extract = info.userAgent.match(/Android \d\.\d\.?\d?/i);
                 var splited = extract[0].split("Android");
                 return splited[1].trim();
@@ -464,7 +469,7 @@
                         return "Vista";
                     case "NT 5.2":
                         info.device = "Desktop";
-                        return "Server 2003 | XP x64 Edition";    
+                        return "Server 2003";    
                     case "NT 5.1":
                         info.device = "Desktop";
                         return "XP";
@@ -492,14 +497,17 @@
                     case "Windows 98; Win 9x 4.90":
                         info.device = "Desktop";
                         return "ME";
+                    case "Windows ME":
+                        info.device = "Desktop";
+                        return "ME";
                     case "WinNT4.0":
                         info.device = "Desktop";
                         return "NT 4.0";
                     case "Windows CE":
                         info.device = "Desktop";
-                        return "Windows CE";
+                        return "CE";
                     case "Windows Phone OS 7.0":
-                        info.device = "Phone";
+                        info.device = "Mobile";
                         return "Windows Phone 7.0";
                     case "Windows Phone OS 7.5":
                         info.device = "Mobile";
