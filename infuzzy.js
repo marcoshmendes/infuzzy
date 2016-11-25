@@ -30,7 +30,7 @@
          * @return {String} Welcome Message
          */
         _infuzzy.sayHi = function () {
-            return "Hi stranger";
+            return "Hello, stranger";
         };
 
         /**
