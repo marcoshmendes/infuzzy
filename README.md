@@ -80,6 +80,22 @@ Infuzzy is in development, till now we have the support bellow:
 
 ### To Do
 
+Browsers
+* Internet Explorer
+* Edge
+* Safari
+* Opera
+* UC
+* Iron
+* Seamonkey
+OS
+* Linux
+* Mac Os
+* Firefox OS
+* Chrome OS
+* Blackberry
+* IOS
+
 ### Authors
 
 * **Marcos Mendes** - @marcoshmendes
