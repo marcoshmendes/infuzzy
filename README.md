@@ -40,6 +40,7 @@ Example of returned object from `infuzzy.getinfo()`
   "device": "Desktop",
   "language": "pt-BR",
   "isBot": false,
+  "url": "http://domain.com/page",
   "ip": null
 }
 ```

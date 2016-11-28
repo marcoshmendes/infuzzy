@@ -22,6 +22,7 @@
             device: null,
             language: navigator.language,
             isBot: false,
+            url: window.location.href,
             ip: null
         }
 
