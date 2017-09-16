@@ -38,22 +38,14 @@
             return "Hello, stranger";
         }
 
-        /**
-         * Return info from a userAgent string
-         * @param {String} userAgent
-         * @return {Object} info
-         */
-        _infuzzy.getInfoFromValue = function(userAgent){
-            info.userAgent = userAgent;
-            browserDetect();
-            osDetect();
-
-            return info;
-        }
-
         var getBrowserShortVersion = function(version) {
-            var shortVersion = version.split('.');
+            var shortVersion;
 
+            if (!version) {
+                return null;
+            }
+
+            shortVersion = version.split('.');
             return shortVersion[0];
         }
 
@@ -151,14 +143,14 @@
                 browser.name = "Chrome";
                 if (agent.search(/Mobile/i) !== -1) {
                     browser.device = "Mobile";
-                    browser.version = detectBrowserVersion(name, agent);
+                    browser.version = detectBrowserVersion(browser.name, agent);
                     browser.shortVersion = getBrowserShortVersion(browser.version);
                     browser.result = setSuccessResult();
                     return browser;
                 }
                 else {
                     browser.device = "Desktop";
-                    browser.version = detectBrowserVersion(name, agent);
+                    browser.version = detectBrowserVersion(browser.name, agent);
                     browser.shortVersion = getBrowserShortVersion(browser.version);
                     browser.result = setSuccessResult();
                     return browser;
@@ -197,17 +189,17 @@
                 browser.name = "Firefox";
                 if (agent.search(/Mobile/i) !== -1) {
                     browser.device = "Mobile";
-                    browser.version = detectBrowserVersion(name, agent);
+                    browser.version = detectBrowserVersion(browser.name, agent);
                     browser.shortVersion = getBrowserShortVersion(browser.version);
                     browser.result = setSuccessResult();
-                    return true;
+                    return browser;
                 }
                 else {
                     browser.device = "Desktop";
-                    browser.version = detectBrowserVersion(name, agent);
+                    browser.version = detectBrowserVersion(browser.name, agent);
                     browser.shortVersion = getBrowserShortVersion(browser.version);
                     browser.result = setSuccessResult();
-                    return true;
+                    return browser;
                 }
             }
 
@@ -409,6 +401,15 @@
                 return os;
             }
 
+            // Linux
+            if (agent.indexOf("Linux") !== -1 && agent.indexOf("Android") === -1) {
+                os.name = "Linux";
+                os.version = osVersionDetect(agent);
+                os.result = setSuccessResult();
+                console.log("OS: ", os);
+                return os;
+            }
+
             // Windows
             if (agent.indexOf("Windows") !== -1) {
                 os.name = "Windows";
@@ -416,117 +417,125 @@
                 os.result = setSuccessResult();
                 return os;
             }
-            if (info.userAgent.indexOf("Win") !== -1) {
+            if (agent.indexOf("Win") !== -1) {
                 info.osName = "Windows";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("Xbox") !== -1) {
+
+            // Xbox
+            if (agent.indexOf("Xbox") !== -1) {
                 info.osName = "Windows";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("Xbox One") !== -1) {
+
+            // Xbox One
+            if (agent.indexOf("Xbox One") !== -1) {
                 info.osName = "Windows";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("Windows Phone") !== -1 && info.userAgent.indexOf("Xbox") == -1) {
+
+            // Windows Phone
+            if (agent.indexOf("Windows Phone") !== -1 && info.userAgent.indexOf("Xbox") == -1) {
                 info.osName = "Windows Phone";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("Android") !== -1) {
+
+            // Android
+            if (agent.indexOf("Android") !== -1) {
                 info.osName = "Android";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("MJ12bot") !== -1) {
+            if (agent.indexOf("MJ12bot") !== -1) {
                 info.osName = "Search Engine";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("Googlebot") !== -1) {
+            if (agent.indexOf("Googlebot") !== -1) {
                 info.osName = "Search Engine";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("AdsBot-Google-Mobile") !== -1) {
+            if (agent.indexOf("AdsBot-Google-Mobile") !== -1) {
                 info.osName = "Search Engine";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("bingbot") !== -1) {
+            if (agent.indexOf("bingbot") !== -1) {
                 info.osName = "Search Engine";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("SimplePie") !== -1) {
+            if (agent.indexOf("SimplePie") !== -1) {
                 info.osName = "Search Engine";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("BingPreview") !== -1) {
+            if (agent.indexOf("BingPreview") !== -1) {
                 info.osName = "Search Engine";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("Yahoo! Slurp") !== -1) {
+            if (agent.indexOf("Yahoo! Slurp") !== -1) {
                 info.osName = "Search Engine";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("SiteLockSpider") !== -1) {
+            if (agent.indexOf("SiteLockSpider") !== -1) {
                 info.osName = "Search Engine";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("okhttp") !== -1) {
+            if (agent.indexOf("okhttp") !== -1) {
                 info.osName = "Search Engine";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("curl") !== -1) {
+            if (agent.indexOf("curl") !== -1) {
                 info.osName = "Search Engine";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("ips-agent") !== -1) {
+            if (agent.indexOf("ips-agent") !== -1) {
                 info.osName = "Search Engine";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("BLEXBot") !== -1) {
+            if (agent.indexOf("BLEXBot") !== -1) {
                 info.osName = "Search Engine";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("YandexBot") !== -1) {
+            if (agent.indexOf("YandexBot") !== -1) {
                 info.osName = "Search Engine";
                 info.osVersion = osVersionDetect();
                 return true;
             }
-            if (info.userAgent.indexOf("ScoutJet") !== -1) {
+            if (agent.indexOf("ScoutJet") !== -1) {
                 info.osName = "Search Engine";
                 info.osVersion = osVersionDetect();
                 return true;
             }
 
             // Game Consoles
-            if (info.userAgent.indexOf("Xbox") !== -1) {
+            if (agent.indexOf("Xbox") !== -1) {
                 if (info.userAgent.search(/NT \d\.\d/i) !== -1) {
                     info.osName = "Windows";
                     info.osVersion = osVersionDetect();
                     info.device = "Xbox 360 Desktop Mode";
                     return true;
                 }
-                if (info.userAgent.indexOf("Windows Phone") !== -1) {
+                if (agent.indexOf("Windows Phone") !== -1) {
                     info.osName = "Windows";
                     info.osVersion = osVersionDetect();
                     info.device = "Xbox 360 Mobile Mode";
                     return true;
                 }
-                if (info.userAgent.indexOf("Xbox One") !== -1) {
+                if (agent.indexOf("Xbox One") !== -1) {
                     info.osName = "Windows";
                     info.osVersion = osVersionDetect();
                     info.device = "Xbox One";
@@ -543,7 +552,7 @@
          */
         var osVersionDetect = function (agent) {
             // Android
-            if (info.userAgent.indexOf("Android") !== -1 && info.userAgent.indexOf("Windows Phone") == -1) {
+            if (agent.indexOf("Android") !== -1 && agent.indexOf("Windows Phone") == -1) {
                 var extract = info.userAgent.match(/Android \d\.\d\.?\d?/i);
                 var splited = extract[0].split("Android");
                 return splited[1].trim();
@@ -551,8 +560,8 @@
 
             // Windows
 
-            if (info.userAgent.indexOf("Windows") !== -1 || info.userAgent.indexOf("Win95") !== -1) {
-                var osVersion = info.userAgent.match(/(NT) \d\d?\.\d\d?|Windows 98; Win 9x 4.90|Windows ME|Windows 98|Win98|Windows 95|Win95|Windows CE|Windows XP|WinNT4.0|Windows Phone OS \d\.\d|Windows Phone \d\d?\.\d/i);
+            if (agent.indexOf("Windows") !== -1 || agent.indexOf("Win95") !== -1) {
+                var osVersion = agent.match(/(NT) \d\d?\.\d\d?|Windows 98; Win 9x 4.90|Windows ME|Windows 98|Win98|Windows 95|Win95|Windows CE|Windows XP|WinNT4.0|Windows Phone OS \d\.\d|Windows Phone \d\d?\.\d/i);
                 switch (osVersion[0]) {
                     case "NT 10.0":
                         info.device = "Desktop";
@@ -635,19 +644,20 @@
             }
 
             // Game Consoles
-            if (info.userAgent.indexOf("Xbox") !== -1) {
+            if (agent.indexOf("Xbox") !== -1) {
                 return null;
             }
         }
 
         
-        _infuzzy.getInfo = function () {
+        _infuzzy.getInfo = function (agentString) {
             var browser;
             var os;
+            var agent = agentString ? agentString : navigator.userAgent;
 
-            browser = browserDetect(navigator.userAgent);
+            browser = browserDetect(agent);
             if (!browser || browser.result.status == 'error') {
-                return browser.result.info;
+                return browser.result;
             } else {
                 info.browserName = browser.name;
                 info.browserVersion = browser.version;
@@ -656,13 +666,15 @@
                 info.isBot = browser.isBot;
             }
 
-            os = osDetect(navigator.userAgent);
+            os = osDetect(agent);
             if (!os || os.result.status == 'error') {
-                return os.result.info;
+                return os.result;
             } else {
-                // Add OS Properties
-            }
 
+                info.osName = os.name;
+                info.osVersion = os.version;
+            }
+            info.userAgent = agent;
             return info;
         };
 
